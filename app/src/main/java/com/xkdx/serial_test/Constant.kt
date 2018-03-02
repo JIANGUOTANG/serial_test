@@ -13,4 +13,8 @@ object Constant {
     val openChargeSucceed  = "FF 0C 0C AA"
     val closeCharge = "FF 03 03 AA"
     val closeChargeSucceed  = "FF 0D 0D AA  "
+    val KEY_TEM = "tem"
+    val KEY_HUM = "hum"
+    val KEY_PM2_5 = "pm2_5"
+    val KEY_LIGHT = "light"
 }

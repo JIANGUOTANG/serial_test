@@ -2,16 +2,23 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'org.greenrobot.greendao' // apply plugin
 android {
     compileSdkVersion 27
     buildToolsVersion "27.0.1"
 
     defaultConfig {
-        applicationId "com.xkdx.serial_test"
+        applicationId "com.jian.pus"
         minSdkVersion 17
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "de9981d519e4e8a926611213", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+        ]
     }
     buildTypes {
         release {
@@ -29,11 +36,36 @@ android {
 
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
     compile 'com.android.support:appcompat-v7:27.0.2'
-    //kotiln
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    compile 'com.airbnb.android:lottie:2.5.0-beta1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+    compile 'com.github.bumptech.glide:glide:4.2.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.2.0'
+    //  图片缓存
+    compile 'com.danikula:videocache:2.7.0'
+    //极光推送
+    compile 'cn.jiguang.sdk:jpush:3.0.9'
+    // 此处以JPush 3.0.9 版本为例。
+    compile 'cn.jiguang.sdk:jcore:1.1.7'
+    // 此处以JCore 1.1.7 版本为例。
+    compile 'org.greenrobot:eventbus:3.1.0-RC'
+    compile 'com.google.code.gson:gson:2.8.2'
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'org.greenrobot:greendao:3.2.2'
+    // add library
+    compile 'com.squareup.okhttp3:okhttp:3.9.0'
+    //播放器
+    compile 'com.devbrackets.android:exomedia:4.0.3'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //动态权限
+    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
+    compile 'io.reactivex.rxjava2:rxkotlin:2.2.0'
+    //工具集合
+    compile 'com.blankj:utilcode:1.11.1'
+    implementation project(':core')
 }
 apply plugin: 'announce'
